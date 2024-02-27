@@ -1,4 +1,5 @@
 import 'package:ecom/Product_Detail.dart';
+import 'package:ecom/ViewAll_page.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -128,7 +129,12 @@ class _HomeState extends State<Home> {
                   ),
                 ),
 
-                TextButton(onPressed: () {}, child: Text('View All'))
+                TextButton(onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => view_All()),
+                  );
+                }, child: Text('View All'))
               ],
             ),
 
@@ -179,7 +185,13 @@ class _HomeState extends State<Home> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-                TextButton(onPressed: () {}, child: Text('View All'))
+                TextButton(onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => (view_All())),
+                  );
+                }, child: Text('View All'))
               ],
             ),
             Container(
@@ -227,7 +239,13 @@ class _HomeState extends State<Home> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
 
-                TextButton(onPressed: () {}, child: Text('View All'))
+                TextButton(onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => (view_All())),
+                  );
+                }, child: Text('View All'))
               ],
             ),
             Container(
