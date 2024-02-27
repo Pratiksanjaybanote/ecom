@@ -9,6 +9,11 @@ class product_Detail extends StatefulWidget {
 }
 
 class _product_DetailState extends State<product_Detail> {
+  bool isSelected = false;
+
+  final List<String> sizes = ['Small', 'Medium', 'Large', 'XL', 'XXL'];
+  int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +25,16 @@ class _product_DetailState extends State<product_Detail> {
           children: [
             // Big Image
 
-            Image.asset(
-              'assets/Shirt.png',
-              height: 400, // Adjust the height as needed
-              width: 400, // Adjust the width as needed
-              fit: BoxFit.contain, // Adjust the BoxFit as needed
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)),
+              child: Image.asset(
+                'assets/Shirt.png',
+                height: 400, // Adjust the height as needed
+                width: 400, // Adjust the width as needed
+                fit: BoxFit.contain, // Adjust the BoxFit as needed
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -51,6 +61,45 @@ class _product_DetailState extends State<product_Detail> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
+                      SizedBox(
+                        height: 40,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: sizes.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  // Toggle the selected state for the clicked container
+                                  // bool isSelected = sizes == index;
+                                  selectedIndex = index;
+                                  print('object: ${selectedIndex}');
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(right: 12),
+                                width: 50,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: selectedIndex == index
+                                      ? Colors.blue
+                                      : Colors.white,
+                                  border: Border.all(color: Colors.blue),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    sizes[index],
+                                    style: TextStyle(fontSize: 10),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
                       Row(
                         children: [
                           Text('₹4,850',
@@ -81,10 +130,11 @@ class _product_DetailState extends State<product_Detail> {
                             decoration: BoxDecoration(color: Colors.white),
                             child: Center(
                               child: InkWell(
-                                onTap: (){
+                                onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => (Cart())),
+                                    MaterialPageRoute(
+                                        builder: (context) => (Cart())),
                                   );
                                 },
                                 child: Text(
@@ -102,9 +152,7 @@ class _product_DetailState extends State<product_Detail> {
                                 decoration: BoxDecoration(color: Colors.blue),
                                 child: Center(
                                   child: InkWell(
-                                    onTap: (){
-                            
-                                    },
+                                    onTap: () {},
                                     child: Text(
                                       'Buy now',
                                       style: TextStyle(
