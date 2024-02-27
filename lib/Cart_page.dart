@@ -9,6 +9,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  int selectedNumber = 1;
   List<Map<String, dynamic>> products = [
     {
       'Image': 'assets/Shirt.png',
@@ -57,7 +58,7 @@ class _CartState extends State<Cart> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       padding: EdgeInsets.all(7),
-                      height: 120,
+                      height: 150,
                       width: 200,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black26),borderRadius: BorderRadius.circular(15.0)),
@@ -82,10 +83,32 @@ class _CartState extends State<Cart> {
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(color: Colors.black26)),
-                                  Text(
-                                    products[index]['Price'],
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        products[index]['Price'],
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(width: 30,),
+                                        DropdownButton<int>(
+                                          value: selectedNumber,
+                                          onChanged: (int ? newValue) {
+                                            if (newValue != null) {
+                                              setState(() {
+                                                selectedNumber = newValue;
+                                              });
+                                            }
+                                          },
+                                          items: List.generate(10, (index) {
+                                            return DropdownMenuItem<int>(
+                                              value: index + 1,
+                                              child: Text((index + 1).toString()),
+                                            );
+                                          }),
+                                        ),
+
+                                    ],
                                   ),
                                 ],
                               ),

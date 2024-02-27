@@ -10,6 +10,7 @@ class product_Detail extends StatefulWidget {
 
 class _product_DetailState extends State<product_Detail> {
   bool isSelected = false;
+  int selectedNumber = 1;
 
   final List<String> sizes = ['Small', 'Medium', 'Large', 'XL', 'XXL'];
   int selectedIndex = 0;
@@ -98,6 +99,22 @@ class _product_DetailState extends State<product_Detail> {
                             );
                           },
                         ),
+                      ),
+                      DropdownButton<int>(
+                        value: selectedNumber,
+                        onChanged: (int ? newValue) {
+                          if (newValue != null) {
+                            setState(() {
+                              selectedNumber = newValue;
+                            });
+                          }
+                        },
+                        items: List.generate(10, (index) {
+                          return DropdownMenuItem<int>(
+                            value: index + 1,
+                            child: Text((index + 1).toString()),
+                          );
+                        }),
                       ),
 
                       Row(
